@@ -1,0 +1,34 @@
+# Node.js dependencies
+/node_modules/
+/frontend/node_modules/
+/server/node_modules/
+
+# Build output directories (React & other front-end build files)
+frontend/build/
+
+# Logs
+*.log
+
+# OS-specific files
+.DS_Store          # macOS system files
+Thumbs.db          # Windows system files
+
+# Environment variables file
+.env
+
+# Debugger files
+.vscode/
+.idea/
+
+# Temporary files
+*.swp
+*.swo
+
+# NPM package lock files (optional, if you want to ignore these)
+package-lock.json
+frontend/package-lock.json
+server/package-lock.json
+
+# Ignore specific folders you don't want to share
+frontend/.env
+server/.env
