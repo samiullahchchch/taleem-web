@@ -1,6 +1,6 @@
 # Node.js dependencies
 /node_modules/
-/frontend/node_modules/
+/client/node_modules/
 /server/node_modules/
 
 # Build output directories (React & other front-end build files)
