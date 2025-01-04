@@ -1,0 +1,73 @@
+import { GraduationCap, TvMinimalPlay } from "lucide-react";
+import { Link, useNavigate } from "react-router-dom";
+import { Button } from "../ui/button";
+import { useContext, useState } from "react";
+import { AuthContext } from "@/context/auth-context";
+
+function StudentViewCommonHeader() {
+  const navigate = useNavigate();
+  const { resetCredentials } = useContext(AuthContext);
+
+  // State to track the button's color and text
+  const [buttonClicked, setButtonClicked] = useState(false);
+
+  function handleLogout() {
+    resetCredentials();
+    sessionStorage.clear();
+  }
+
+  function handleGetRecommendationsClick() {
+    // Toggle the button color and text
+    setButtonClicked(prevState => !prevState);
+  }
+
+  return (
+    <header className="flex items-center justify-between p-4 border-b relative">
+      <div className="flex items-center space-x-4">
+        <Link to="/home" className="flex items-center hover:text-black">
+          <GraduationCap className="h-8 w-8 mr-4 " />
+          <span className="font-extrabold md:text-xl text-[14px]">
+            Taleem Academy
+          </span>
+        </Link>
+        <div className="flex items-center space-x-1">
+          <Button
+            variant="ghost"
+            onClick={() => {
+              location.pathname.includes("/courses")
+                ? null
+                : navigate("/courses");
+            }}
+            className="text-[14px] md:text-[16px] font-medium"
+          >
+            Explore Courses
+          </Button>
+        </div>
+      </div>
+      <div className="flex items-center space-x-4">
+        <div className="flex gap-4 items-center">
+          <div
+            onClick={() => navigate("/student-courses")}
+            className="flex cursor-pointer items-center gap-3"
+          >
+            <span className="font-extrabold md:text-xl text-[14px]">
+              My Courses
+            </span>
+            <TvMinimalPlay className="w-8 h-8 cursor-pointer" />
+          </div>
+          <Button onClick={handleLogout}>Sign Out</Button>
+        </div>
+        {/* New Button for Recommendations */}
+        <Button
+          variant="outline"
+          onClick={handleGetRecommendationsClick}
+          className={`text-[14px] md:text-[16px] font-medium ${buttonClicked ? 'bg-yellow-200' : ''}`}
+        >
+          {buttonClicked ? "On" : "Get Recommendations"}
+        </Button>
+      </div>
+    </header>
+  );
+}
+
+export default StudentViewCommonHeader;
